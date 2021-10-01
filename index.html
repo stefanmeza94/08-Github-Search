@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/favicon-32x32.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+  </head>
+  <body>
+    <main class="container">
+      <section class="wrapper">
+
+        <header class="header">
+          <h1>devfinder</h1>  
+          <button class="js-toggle_btn toggle_btn">
+            <p>dark</p>
+            <img src="./assets/icon-moon.svg" alt="moon icon">
+          </button>
+        </header>
+
+        <form class="form">
+          <div class="input_wrapper">
+            <img src="./assets/icon-search.svg" alt="">
+            <input type="text" class="input js-input" placeholder="Search GitHub username...">
+            <button class="btn js-btn">Search</button>
+          </div>
+        </form>
+
+        <div class="results">
+          <div class="result_image-wrapper">
+            <img src="" alt="user image">
+          </div>
+          <div class="result_name-wrapper">
+            <h3 class="username js-username">The Octocat</h3>
+            <p class="userlink js-userlink">@octocat</p>
+          </div>
+          <div class="results_joined-date">
+            <p class="joinDate js-joinDate">Joined 25 Jan 2011</p>
+          </div>
+          <div class="results_text">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius consequuntur dicta repudiandae.</p>
+          </div>
+          <div class="results_numbers">
+            <div>
+              <p>Repos</p>
+              <h3 class="js-repos">8</h3>
+            </div>
+            <div>
+              <p>Followers</p>
+              <h3 class="js-folowers">3938</h3>
+            </div>
+            <div>
+              <p>Following</p>
+              <h3 class="js-following">9</h3>
+            </div>
+          </div>
+          <div class="results_information">
+            <div class="information">
+              <i class="fa fa-map-marker-alt"></i>
+              <span class="js-location">San Francisco</span>
+            </div>
+            <div class="information">
+              <i class="fa fa-link"></i>
+              <span class="js-website">https://github.blog</span>
+            </div>
+            <div class="information">
+              <i class="fab fa-twitter"></i>
+              <span class="js-twitter">Not available</span>
+            </div>
+            <div class="information">
+              <i class="fa fa-building"></i>
+              <span class="js-company">@github</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

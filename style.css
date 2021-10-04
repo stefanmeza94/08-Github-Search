@@ -377,6 +377,8 @@ p {
 
   .form .input_wrapper .input {
     padding: 22px 0 22px 80px;
+    font-size: 18px;
+    line-height: 25px;
   }
 
   .form .input_wrapper .input::placeholder {
@@ -493,6 +495,7 @@ p {
 
 .container.black .form .input_wrapper .input {
   background-color: var(--dark-blue-dark);
+  color: #fff;
 }
 
 .container.black .form .input_wrapper .input::placeholder {

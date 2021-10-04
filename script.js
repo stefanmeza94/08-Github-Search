@@ -44,7 +44,6 @@ toggleBtn.addEventListener('click', function() {
   }
 });
 
-
 // display users
 const displayUser = user => {
   avatar.setAttribute('src', `${user.avatar_url}`);

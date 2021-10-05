@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Github search</title>
   </head>
   <body>
     <main class="container">
@@ -26,6 +26,7 @@
           <div class="input_wrapper">
             <img src="./assets/icon-search.svg" alt="">
             <input type="text" class="input js-input" placeholder="Search GitHub username...">
+            <p class="error js-error">No results</p>
             <button class="btn js-btn">Search</button>
           </div>
         </form>
@@ -36,7 +37,7 @@
           </div>
           <div class="result_name-wrapper">
             <h3 class="username js-username">The Octocat</h3>
-            <p class="userlink js-userlink">@octocat</p>
+            <a href="#" class="userlink js-userlink">@octocat</a>
           </div>
           <div class="results_joined-date">
             <p class="joinDate js-joinDate">Joined 25 Jan 2011</p>
@@ -61,19 +62,19 @@
           <div class="results_information">
             <div class="information information_1">
               <i class="fa fa-map-marker-alt js-marker"></i>
-              <span class="js-location"></span>
+              <a href="#" class="js-location"></a>
             </div>
             <div class="information information_2">
               <i class="fa fa-link js-link"></i>
-              <span class="js-blog"></span>
+              <a href="#" class="js-blog"></a>
             </div>
             <div class="information information_3">
               <i class="fab fa-twitter js-twitterImage"></i>
-              <span class="js-twitter"></span>
+              <a href="#" class="js-twitter"></a>
             </div>
             <div class="information information_4">
               <i class="fa fa-building js-building"></i>
-              <span class="js-company"></span>
+              <a href="#" class="js-company"></a>
             </div>
           </div>
 

@@ -4,7 +4,9 @@ const imageMoon = document.querySelector('.header .toggle_btn img');
 const toggleColorText = document.querySelector('.header .toggle_btn p');
 const form = document.querySelector('.js-form');
 const input = document.querySelector('.js-input');
+const btn = document.querySelector('.js-btn');
 
+const error = document.querySelector('.js-error');
 const avatar = document.querySelector('.avatar');
 const username = document.querySelector('.js-username');
 const userlink = document.querySelector('.js-userlink');
@@ -47,14 +49,13 @@ toggleBtn.addEventListener('click', function() {
 
 // add class if property is null 
 const nullProperties = function(property, image) {
-  property.innerText = 'Not Available';
+  property.innerHTML = `<a href="#" target="_blank" class="js-blog">Not Available</a>`;
   property.classList.add('notAvailable');
   image.classList.add('notAvailable');
 }
 
 // remove class if property is available
-const showProperties = function(property, image, location) {
-  property.innerText = `${location}`;
+const showProperties = function(property, image) {
   property.classList.remove('notAvailable');
   image.classList.remove('notAvailable');
 }
@@ -72,11 +73,10 @@ const showDate = function(date) {
 
 // display users
 const displayUser = user => {
-  const date = user.created_at;
-  const newDate = new Date(date);
+  console.log(user);
   avatar.setAttribute('src', `${user.avatar_url}`);
-  username.innerText = `${user.name}`;
-  userlink.innerText = `@${user.login}`;
+  username.innerText = `${user.name === null ? user.login : user.name}`;
+  userlink.innerHTML = `@<a href="${user.html_url}" target="_blank" class="userlink js-userlink">${user.login}</a>`;
   joinDate.innerText = `${showDate(user.created_at)}`;
   bio.innerHTML = `<p class="js-bio ${user.bio === null ? 'notAvailable' : ''}">${user.bio === null ? 'This profile has no bio' : `${user.bio}`}</p>`;
   repos.innerText = `${user.public_repos}`;
@@ -85,19 +85,38 @@ const displayUser = user => {
 
   // check location
   if (user.location === null) nullProperties(loc, locImage);
-  else showProperties(loc, locImage, user.location);
+  else {
+    showProperties(loc, locImage, user.location);
+    loc.innerText = `${user.location}`;
+  }
 
   // check blog
   if (user.blog === null || user.blog === '') nullProperties(blog, blogImage);
-  else showProperties(blog, blogImage, user.blog);
+  else {
+    showProperties(blog, blogImage);
+    blog.innerHTML = `<a href="https://www.linkedin.com/in/${user.login}" target="_blank" class="js-blog">${user.blog}</a>`;
+  }
 
   // check twitter
-  if (user.twitter_username === null) nullProperties(twitter, twitterImage);
-  else showProperties(twitter, twitterImage, user.twitter);
-
+  if (user.twitter_username === null || user.twitter_username === '') nullProperties(twitter, twitterImage);
+  else {
+    showProperties(twitter, twitterImage);
+    twitter.innerHTML = `<a href="https://twitter.com/${user.twitter_username}" target="_blank" class="js-twitter">${user.twitter_username}</a>`;
+  }
   // check company
   if (user.company === null) nullProperties(company, companyImage);
-  else showProperties(company, companyImage, user.company);
+  else { 
+    showProperties(company, companyImage);
+    company.innerHTML = `<a href="https://${user.blog}" target="_blank" class="js-company">${user.company}</a>`
+  }
+
+  
+  input.value = '';
+}
+
+// there is no user
+const errorMessage = function() {
+  error.style.visibility = 'visible';
 }
 
 // fetch user
@@ -105,7 +124,11 @@ const getUsers = async user => {
   try {
     const res = await fetch(`https://api.github.com/users/${user}`);
     let users = await res.json();
-    displayUser(users);
+    if (users.name !== undefined) {
+      displayUser(users);
+    } else {
+      errorMessage();
+    }
   } catch (err) {
     console.error(err);
   }
@@ -118,12 +141,13 @@ document.addEventListener('onload', getUsers('octocat'));
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
-  if (input.value !== '' ) {
-    console.log(input.value);
-    getUsers(input.value);
-  }
-
-  input.value = '';
+  if (input.value !== '') getUsers(input.value);
 });
 
-
+// when you clicked outside of the form close error message and delete input value
+document.body.addEventListener('click', function(e) {
+  if (e.target.value !== '' && e.target !== form && e.target !== btn) {
+    input.value = '';
+    error.style.visibility = 'hidden';
+  } 
+});

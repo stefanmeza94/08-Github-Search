@@ -16,6 +16,9 @@
   /* button hover colors */
   --button-hover: #60ABFF;
 
+  /* error message */
+  --error-message: #F74646;
+
   --ff-primary: 'Space Mono', monospace;
 }
 
@@ -121,6 +124,16 @@ p {
   left: 12px;
 }
 
+.form .input_wrapper .error {
+  visibility: hidden;
+  position: absolute;
+  right: 110px;
+  color: var(--error-message);
+  font-size: 13px;
+  line-height: 25px;
+  font-weight: 400;
+}
+
 .form .input_wrapper .btn {
   position: absolute;
   right: 7px;
@@ -182,6 +195,7 @@ p {
   font-size: 13px;
   line-height: 19.25px;
   color: var(--blue-white);
+  text-decoration: none;
 }
 
 .results_joined-date {
@@ -248,7 +262,8 @@ p {
   color: var(--greyish-blue-white);
 }
 
-.results_information .information span {
+.results_information .information a {
+  text-decoration: none;
   color: var(--greyish-blue-white);
   font-size: 13px;
   line-height: 19.25px;
@@ -279,6 +294,16 @@ p {
 
   .form .input_wrapper .avatar {
     left: 32px;
+  }
+
+  .form .input_wrapper .error {
+    visibility: hidden;
+    position: absolute;
+    right: 120px;
+    color: var(--error-message);
+    font-size: 15px;
+    line-height: 22.22px;
+    font-weight: 700;
   }
 
   .form .input_wrapper .btn {
@@ -353,6 +378,11 @@ p {
     grid-template-rows: repeat(2, auto);
   }
 
+  .results_information .information a {
+    font-size: 15px;
+    line-height: 22.22px;
+  }
+
   .results_information .information_3 {
     grid-area: 1 / 2 / 2 / 3;
   }
@@ -387,6 +417,16 @@ p {
 
   .form .input_wrapper .avatar {
     left: 32px;
+  }
+
+  .form .input_wrapper .error {
+    visibility: hidden;
+    position: absolute;
+    right: 120px;
+    color: var(--error-message);
+    font-size: 15px;
+    line-height: 22.22px;
+    font-weight: 700;
   }
 
   .form .input_wrapper .btn {
@@ -473,6 +513,11 @@ p {
     grid-template-rows: repeat(2, auto);
   }
 
+  .results_information .information a {
+    font-size: 15px;
+    line-height: 22.22px;
+  }
+
   .results_information .information_3 {
     grid-area: 1 / 2 / 2 / 3;
   }
@@ -534,7 +579,7 @@ p {
   color: #fff;
 }
 
-.container.black .results_information .information span {
+.container.black .results_information .information a {
   color: #fff;
 }
 

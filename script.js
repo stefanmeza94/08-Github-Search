@@ -44,73 +44,77 @@ toggleBtn.addEventListener('click', function() {
   }
 });
 
+
+// add class if property is null 
+const nullProperties = function(property, image) {
+  property.innerText = 'Not Available';
+  property.classList.add('notAvailable');
+  image.classList.add('notAvailable');
+}
+
+// remove class if property is available
+const showProperties = function(property, image, location) {
+  property.innerText = `${location}`;
+  property.classList.remove('notAvailable');
+  image.classList.remove('notAvailable');
+}
+
+
+const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+// show date
+const showDate = function(date) {
+  const newDate = new Date(date);
+  let mon = months[newDate.getMonth()];
+  
+  return `Joined: ${newDate.getDate()} ${mon} ${newDate.getUTCFullYear()}`;
+}
+
+
 // display users
 const displayUser = user => {
+  const date = user.created_at;
+  const newDate = new Date(date);
   avatar.setAttribute('src', `${user.avatar_url}`);
   username.innerText = `${user.name}`;
   userlink.innerText = `@${user.login}`;
-  joinDate.innerText = `Joined: ${user.created_at}`;
+  joinDate.innerText = `${showDate(user.created_at)}`;
   bio.innerHTML = `<p class="js-bio ${user.bio === null ? 'notAvailable' : ''}">${user.bio === null ? 'This profile has no bio' : `${user.bio}`}</p>`;
   repos.innerText = `${user.public_repos}`;
   followers.innerText = `${user.followers}`;
   following.innerText = `${user.following}`;
 
   // check location
-  if (user.location === null) {
-    loc.innerText = 'Not Available';
-    loc.classList.add('notAvailable');
-    locImage.classList.add('notAvailable');
-  } else {
-    loc.innerText = `${user.location}`;
-    loc.classList.remove('notAvailable');
-    locImage.classList.remove('notAvailable');
-  }
+  if (user.location === null) nullProperties(loc, locImage);
+  else showProperties(loc, locImage, user.location);
 
   // check blog
-  if (user.blog === null || user.blog === '') {
-    blog.innerText = 'Not Available';
-    blog.classList.add('notAvailable');
-    blogImage.classList.add('notAvailable');
-  } else {
-    blog.innerText = `${user.blog}`;
-    blog.classList.remove('notAvailable');
-    blogImage.classList.remove('notAvailable');
-  }
+  if (user.blog === null || user.blog === '') nullProperties(blog, blogImage);
+  else showProperties(blog, blogImage, user.blog);
 
   // check twitter
-  if (user.twitter_username === null) {
-    twitter.innerText = 'Not Available';
-    twitter.classList.add('notAvailable');
-    twitterImage.classList.add('notAvailable');
-  } else {
-    twitter.innerText = `${user.twitter}`;
-    twitter.classList.remove('notAvailable');
-    twitterImage.classList.remove('notAvailable');
-  }
+  if (user.twitter_username === null) nullProperties(twitter, twitterImage);
+  else showProperties(twitter, twitterImage, user.twitter);
 
   // check company
-  if (user.company === null) {
-    company.innerText = 'Not Available';
-    company.classList.add('notAvailable');
-    companyImage.classList.add('notAvailable');
-  } else {
-    company.innerText = `${user.company}`;
-    company.classList.remove('notAvailable');
-    companyImage.classList.remove('notAvailable');
-  }
+  if (user.company === null) nullProperties(company, companyImage);
+  else showProperties(company, companyImage, user.company);
 }
 
+// fetch user
 const getUsers = async user => {
   try {
     const res = await fetch(`https://api.github.com/users/${user}`);
     let users = await res.json();
     displayUser(users);
-    console.log(users);
   } catch (err) {
     console.error(err);
   }
 }
 
+// on page load show octocat user
+document.addEventListener('onload', getUsers('octocat'));
+
+// listening submit on form (input)
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -121,3 +125,5 @@ form.addEventListener('submit', function(e) {
 
   input.value = '';
 });
+
+

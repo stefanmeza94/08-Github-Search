@@ -47,8 +47,8 @@ toggleBtn.addEventListener('click', function() {
 });
 
 
-// add class if property is null 
-const nullProperties = function(property, image) {
+// add class if property is falsy
+const setNullProperties = function(property, image) {
   property.innerHTML = `<a href="#" target="_blank" class="js-blog">Not Available</a>`;
   property.classList.add('notAvailable');
   image.classList.add('notAvailable');
@@ -73,7 +73,6 @@ const showDate = function(date) {
 
 // display users
 const displayUser = user => {
-  console.log(user);
   avatar.setAttribute('src', `${user.avatar_url}`);
   username.innerText = `${user.name === null ? user.login : user.name}`;
   userlink.innerHTML = `@<a href="${user.html_url}" target="_blank" class="userlink js-userlink">${user.login}</a>`;
@@ -84,27 +83,27 @@ const displayUser = user => {
   following.innerText = `${user.following}`;
 
   // check location
-  if (user.location === null) nullProperties(loc, locImage);
+  if (!user.location) setNullProperties(loc, locImage);
   else {
     showProperties(loc, locImage, user.location);
     loc.innerText = `${user.location}`;
   }
 
   // check blog
-  if (user.blog === null || user.blog === '') nullProperties(blog, blogImage);
+  if (!user.blog) setNullProperties(blog, blogImage);
   else {
     showProperties(blog, blogImage);
     blog.innerHTML = `<a href="https://www.linkedin.com/in/${user.login}" target="_blank" class="js-blog">${user.blog}</a>`;
   }
 
   // check twitter
-  if (user.twitter_username === null || user.twitter_username === '') nullProperties(twitter, twitterImage);
+  if (!user.twitter_username) setNullProperties(twitter, twitterImage);
   else {
     showProperties(twitter, twitterImage);
     twitter.innerHTML = `<a href="https://twitter.com/${user.twitter_username}" target="_blank" class="js-twitter">${user.twitter_username}</a>`;
   }
   // check company
-  if (user.company === null) nullProperties(company, companyImage);
+  if (!user.company) setNullProperties(company, companyImage);
   else { 
     showProperties(company, companyImage);
     company.innerHTML = `<a href="https://${user.blog}" target="_blank" class="js-company">${user.company}</a>`
